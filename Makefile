@@ -19,7 +19,6 @@ OBJS = $(SRCS:.c=.o )
 all: $(NAME)
 
 $(NAME): $(OBJS)
-#	$(AR) $(NAME) $(OBJS)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
 %c: %.o
@@ -33,10 +32,15 @@ fclean: clean
 
 re: fclean all
 
+# libft build and full project clean
 libft:
 	@make -C libft full
 
+full-clean: fclean
+	@make -C libft fclean
+
+# test section
 test: libft all
 	./$(NAME) enter.txt program1 program2 exit.txt
 
-.PHONY: all clean fclean re test libft
+.PHONY: all clean fclean re test libft full-clean
