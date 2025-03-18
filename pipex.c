@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 10:23:23 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:39:31 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ int	main(int argc, char **argv)
 	{
 		while (params < (argc - 1))
 		{
-			printf("%d %s", params, argv[params]);
+			if (params == 1 || params == 3)
+			{
+				// TODO verify files existence
+				printf("\t test: %s %d\n", argv[params], access(argv[params], F_OK));
+				printf("\t test: %s %d\n", argv[params], access(argv[params], R_OK | W_OK | X_OK));
+			}
+			printf("%d %s\n", params, argv[params]);
 			params++;
 		}
 	}

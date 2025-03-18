@@ -34,5 +34,4 @@ re: fclean all
 test: all
 	./$(NAME) enter.txt program1 program2 exit.txt
 
-
 .PHONY: all clean fclean re test
