@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/11 16:20:33 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/16 22:52:12 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+void	*ft_calloc(size_t num_elem, size_t size_elem)
+{
+	unsigned char	*result;
+	size_t			count;
 
-void	dummy_function(void);
-
-#endif
+	count = 0;
+	result = malloc(num_elem * size_elem);
+	if (!result)
+		return (NULL);
+	while (count < (num_elem * size_elem))
+		result[count++] = 0;
+	return (result);
+}

@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/19 00:17:59 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/25 13:51:43 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*new;
+	t_list	*aux;
 
-void	dummy_function(void);
-
-#endif
+	new = NULL;
+	while (lst)
+	{
+		aux = ft_lstnew(0);
+		if (!aux)
+		{
+			ft_lstclear(&new, del);
+			return (NULL);
+		}
+		aux->content = f(lst->content);
+		ft_lstadd_back(&new, aux);
+		lst = lst->next;
+	}
+	return (new);
+}

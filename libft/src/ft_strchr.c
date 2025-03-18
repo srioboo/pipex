@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/04 09:18:01 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/14 09:13:27 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	chr;
+	int				count;
 
-void	dummy_function(void);
-
-#endif
+	chr = c;
+	count = 0;
+	while (*s != '\0')
+	{
+		if (*s == chr)
+		{
+			count++;
+			return ((char *)s);
+		}
+		s++;
+	}
+	if (chr == '\0')
+		return ((char *)s);
+	if (count == 0)
+		return (NULL);
+	return ((char *)s);
+}

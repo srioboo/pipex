@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/04 09:19:25 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/15 16:42:36 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+char	*ft_strrchr(const char *srt, int c)
+{
+	char			*result;
+	int				count;
+	unsigned char	chr;
 
-void	dummy_function(void);
-
-#endif
+	chr = c;
+	result = (char *)srt;
+	count = 0;
+	while (*srt != '\0')
+	{
+		if (srt[0] == chr)
+		{
+			result = (char *)srt;
+			if (count > 0)
+				result = (char *)srt;
+			count++;
+		}
+		srt++;
+	}
+	if (chr == '\0')
+		return ((char *)srt);
+	if (count == 0)
+		return (NULL);
+	return (result);
+}

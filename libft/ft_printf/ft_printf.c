@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/31 08:55:51 by srioboo-          #+#    #+#             */
+/*   Updated: 2025/01/10 15:59:50 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+int	ft_printf(char const *s, ...)
+{
+	va_list	args;
+	size_t	size;
 
-void	dummy_function(void);
-
-#endif
+	va_start(args, s);
+	size = 0;
+	while (*s != '\0')
+	{
+		if (*s == '%')
+		{
+			s++;
+			size += ft_type((char *)s, args);
+		}
+		else
+			write(1, s, 1);
+		s++;
+		size++;
+	}
+	va_end(args);
+	return (size);
+}

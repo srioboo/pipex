@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/04 09:27:41 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/14 09:13:42 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	src_size;
+	size_t	aux;
 
-void	dummy_function(void);
-
-#endif
+	src_size = 0;
+	while (src[src_size] != '\0')
+		src_size++;
+	if (size == 0)
+		return (src_size);
+	aux = 0;
+	while (src[aux] != '\0' && aux < (size - 1))
+	{
+		dst[aux] = src[aux];
+		aux++;
+	}
+	dst[aux] = '\0';
+	return (src_size);
+}

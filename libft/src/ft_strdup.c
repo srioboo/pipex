@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/11 16:15:36 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/14 22:12:32 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+char	*ft_strdup(const char *s)
+{
+	char	*srt;
+	int		i;
+	int		j;
 
-void	dummy_function(void);
-
-#endif
+	i = ft_strlen(s);
+	srt = malloc(i + 1);
+	if (srt == NULL)
+		return (NULL);
+	j = 0;
+	while (s[j])
+	{
+		srt[j] = s[j];
+		j++;
+	}
+	srt[j] = '\0';
+	return (srt);
+}

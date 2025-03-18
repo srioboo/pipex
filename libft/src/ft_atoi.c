@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/03/18 12:10:32 by srioboo-         ###   ########.fr       */
+/*   Created: 2024/12/04 09:15:30 by srioboo-          #+#    #+#             */
+/*   Updated: 2024/12/14 09:10:36 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/src/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+int	ft_atoi(const char *cton)
+{
+	int	result;
+	int	sign;
+	int	i;
 
-void	dummy_function(void);
-
-#endif
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (cton[i] == ' ' || (cton[i] >= 9 && cton[i] <= 13))
+		i++;
+	if (cton[i] == '-' || cton[i] == '+')
+	{
+		if (cton[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (cton[i] >= '0' && cton[i] <= '9')
+	{
+		result = result * 10 + (cton[i] - '0');
+		i++;
+	}
+	return (sign * result);
+}
