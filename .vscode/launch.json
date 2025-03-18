@@ -1,0 +1,47 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Pipex Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${fileDirname}/pipex",
+			"args": ["enter.txt", "program1", "program2", "exit.txt"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+				}
+			],
+			"preLaunchTask": "Build-pipex",
+			"miDebuggerArgs": "/bin/gdb"
+		},
+		{
+			"name": "Pipex Test-Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${fileDirname}/pipex",
+			"args": ["1 4 3"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+				}
+			],
+			"preLaunchTask": "Test-Build-pipex",
+			"miDebuggerArgs": "/bin/gdb"
+		}
+	]
+}

@@ -1,0 +1,54 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build-pipex",
+			"command": "/bin/gcc",
+			"type": "cppbuild",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"*.c",
+				"-Iinclude",
+				"-o",
+				"${fileDirname}/pipex"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Task for build the program."
+		},
+		{
+			"label": "Test-Build-pipex",
+			"command": "/bin/gcc",
+			"type": "cppbuild",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"../*.c",
+				"main_test.c",
+				"test_*.c",
+				"-I../include",
+				"-Iinclude",
+				"-Llib",
+				"-lfuntest",
+				"-o",
+				"${fileDirname}/pipex"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Task for build the program."
+		}
+	]
+}
