@@ -43,4 +43,15 @@ full-clean: fclean
 test: libft all
 	./$(NAME) enter.txt program1 program2 exit.txt
 
-.PHONY: all clean fclean re test libft full-clean
+# detect memory leaks
+sane: libft all
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -fsanitize=address,undefined -g
+	./$(NAME)
+
+val: all
+	valgrind --leak-check=full ./$(NAME)
+
+vall: all
+	valgrind --leak-check=full --verbose --track-origins=yes --log-file=leaks.txt ./$(NAME)
+
+.PHONY: all clean fclean re test libft full-clean sane val vall
