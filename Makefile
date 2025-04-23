@@ -8,7 +8,8 @@ CFLAGS = -Wall -Wextra -Werror
 AR = @ar rcs
 RM = @rm
 # Libft include
-LIBFT = -Llibft -l:libft.a -Ilibft/src
+LIBFT = -Llibft -l:libft.a
+INCLUDES = -I./ -Ilibft/src -Ilibft/ft_printf
 
 # Source files
 SRCS = pipex.c \
@@ -22,7 +23,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
 %c: %.o
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
@@ -37,15 +38,15 @@ libft:
 	@make -C libft full
 
 full-clean: fclean
-	@make -C libft fclean
+	@make -C libft full-clean
 
 # test section
 test: libft all
-	./$(NAME) enter.txt program1 program2 exit.txt
+	./$(NAME) infile program1 program2 outfile
 
 # detect memory leaks
 sane: libft all
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -fsanitize=address,undefined -g
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(INCLUDES) -o $(NAME) -fsanitize=address,undefined -g
 	./$(NAME)
 
 val: all
