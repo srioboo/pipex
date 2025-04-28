@@ -42,7 +42,7 @@ full-clean: fclean
 
 # test section
 test: libft all
-	./$(NAME) infile program1 program2 outfile
+	./$(NAME) infile "ls -l" program2 outfile
 
 # detect memory leaks
 sane: libft all

@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/04/23 22:55:28 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:05:19 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	pipex(int argc, char **argv)
 		if (param == 1)
 			infile = argv[param];
 		if (param == 2)
+		{
 			ft_printf("Param 2: %s\n", argv[param]);
+			ft_split(param, ' ');
+		}
 		if (param == 3)
-			ft_printf("Param 2: %s\n", argv[param]);
+			ft_printf("Param 3: %s\n", argv[param]);
 		if (param == 4)
 			outfile = argv[param];
 		if (param == 3)
@@ -46,6 +49,13 @@ void	pipex(int argc, char **argv)
 			ft_printf("\t test: %s %d\n", argv[param], access(argv[param], F_OK | R_OK | W_OK));
 			ft_printf("\t test: %s %d\n", argv[param], access(argv[param], R_OK | W_OK | X_OK));
 			
+			// TODO - example 
+			char *filename = "/usr/bin/ls";
+    		char *arguments[] = {"/usr/bin/ls", "-l", NULL};
+			char *env[] = { NULL };
+			if (execve(filename, arguments, env) == -1)
+				ft_printf("se produce un error");
+
 			// TODO - create de pipes pipe(commad)
 			// TODO - wait until writting to the outfile
 		}
