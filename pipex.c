@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/04/28 11:51:53 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:51:59 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 int	tuberia()
 {
-	int	pipefd[2];
-	int pid;
-	char buffer[100];
+	int		pipefd[2];
+	int		pid;
+	char	buffer[100];
 
 	if(pipe(pipefd) == -1)
 	{
@@ -58,7 +58,7 @@ int	tuberia()
 		wait(NULL); // Esperar a que el hijo termine
 	}
 
-	return 0;
+	return	(0);
 }
 
 void	pipex(int argc, char **argv)
