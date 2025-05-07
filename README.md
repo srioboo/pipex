@@ -5,6 +5,27 @@ The program will implement a pipe
 ```shell
 ./pipex infile.txt "ls -l" "wc -l" outfile.txt
 ```
+## notas
+
+https://github.com/a-ctn-a
+https://github.com/emiliux136/Pipex/blob/main/esquema_emilgarc_pipex.pdf
+
+### Test a realizar
+
+```shell
+1. Copiar el contenido de infile en outfile
+./pipex infile "cat" "cat" outfile
+ 2. Convertir todas las letras "a" en "o"
+./pipex infile "tr 'a' 'o'" "cat" outfile
+3. Pasar todo el texto a mayúsculas
+./pipex infile "tr 'a-z' 'A-Z'" "cat" outfile
+4. Contar el número de palabras
+./pipex infile "cat" "wc -w" outfile
+5. Ordenar alfabéticamente el contenido del archivo
+./pipex infile "sort" "cat" outfile
+% ./pipex  infile"" "     " out.txt
+ % ./pipex infile "ls" "" out.txt
+```
 
 ## Subject
 
