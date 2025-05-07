@@ -13,6 +13,7 @@ INCLUDES = -I./ -Ilibft/src -Ilibft/ft_printf
 
 # Source files
 SRCS = pipex.c \
+		pipex_process.c \
 		pipex_utils.c
 # Objects
 OBJS = $(SRCS:.c=.o )
@@ -42,7 +43,8 @@ full-clean: fclean
 
 # test section
 test: libft all
-	./$(NAME) infile "ls -l" program2 outfile
+	./$(NAME) infile "sort" "cat" outfile
+#	./$(NAME) infile "ls -l" program2 outfile
 
 # detect memory leaks
 sane: libft all
