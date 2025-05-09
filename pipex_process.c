@@ -19,44 +19,48 @@ void	parent_process(t_pipex_data *pipex_data)
 	close_file(fd2);
 }
 
-int	tuberia(void)
+int	pipex_process(t_pipex_data *pipex_data)
 {
 	int		pipefd[2];
 	int		pid;
 	char	buffer[100];
 
-	if(pipe(pipefd) == -1)
+	if (pipe(pipefd) == -1)
 	{
 		perror("An error in pipe as happend");
 		exit(EXIT_FAILURE);
 	}
-
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("Error creating child proccess");
 		exit(EXIT_FAILURE);
 	}
-
 	if (pid == 0) { // Proceso hijo
-		close(pipefd[1]); // Cerrar el extremo de escritura
+		child_process(pipex_data);
 
-		// Leer del pipe
-		read(pipefd[0], buffer, sizeof(buffer));
-		printf("Hijo recibió: %s\n", buffer);
+		// WAIT
+		int status = 0;
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status)) // TODO - more options
+			parent_process(pipex_data);
 
-		close(pipefd[0]); // Cerrar el extremo de lectura
+		// ON FINISH LAUNCH PARENT
+
+		// close(pipefd[1]); // Cerrar el extremo de escritura
+		// // Leer del pipe
+		// read(pipefd[0], buffer, sizeof(buffer));
+		// printf("Hijo recibió: %s\n", buffer);
+		// close(pipefd[0]); // Cerrar el extremo de lectura
 		exit(EXIT_SUCCESS);
 	} else { // Proceso padre
-		close(pipefd[0]); // Cerrar el extremo de lectura
-
-		// Escribir en el pipe
-		const char *message = "Hola desde el proceso padre!";
-		write(pipefd[1], message, strlen(message) + 1);
-
-		close(pipefd[1]); // Cerrar el extremo de escritura
-		wait(NULL); // Esperar a que el hijo termine
+		exit(EXIT_FAILURE); // 
+		// close(pipefd[0]); // Cerrar el extremo de lectura
+		// // Escribir en el pipe
+		// const char *message = "Hola desde el proceso padre!";
+		// write(pipefd[1], message, strlen(message) + 1);
+		// close(pipefd[1]); // Cerrar el extremo de escritura
+		// wait(NULL); // Esperar a que el hijo termine
 	}
-
 	return	(0);
 }

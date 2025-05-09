@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/07 23:50:06 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/09 22:50:59 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,43 +40,37 @@ void	test(int argc, char **argv, char **envp, int param)
 	// TODO - wait until writting to the outfile
 }
 
-void	pipex(int argc, char **argv, char **envp)
+t_pipex_data	*process_parameters(t_pipex_data *pipex_data,
+					int argc, char **argv)
 {
-	int		param;
-	//char	*infile;
-	//char	*outfile;
-	// int		fd1;
-	// int		fd2;
-	t_pipex_data	*pipex_data;
+	int	param;
 
-
-	pipex_data = (t_pipex_data *)malloc(sizeof(t_pipex_data));
 	param = 1;
 	while (param <= (argc - 1))
 	{
 		if (param == 1)
 			pipex_data->infile = argv[param];
 		if (param == 2)
-		{
 			pipex_data->program_a = argv[param];
-			ft_printf("Param 2: %s\n", argv[param]);
-			char **command1 = ft_split(argv[param], ' ');
-			ft_printf("comand 1 splitted: %s %s\n", command1[0], command1[1]);
-		}
 		if (param == 3)
 			pipex_data->program_b = argv[param];
 		if (param == 4)
 			pipex_data->outfile = argv[param];
-		if (param == 3)
-			test(argc, argv, envp, param);
 		param++;
 	}
+	return (pipex_data);
+}
 
-	// process child
-	child_process(pipex_data);
-	// process parent
-	parent_process(pipex_data);
+void	pipex(int argc, char **argv, char **envp)
+{
+	t_pipex_data	*pipex_data;
+	int				param;
 
+	pipex_data = (t_pipex_data *)malloc(sizeof(t_pipex_data));
+	if (!pipex_data)
+		pipex_data == NULL;
+	pipex_data = process_parameters(pipex_data, argc, argv);
+	pipex_process(pipex_data);
 }
 
 int	main(int argc, char **argv, char **envp)
