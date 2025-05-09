@@ -5,9 +5,18 @@ void	child_process(t_pipex_data *pipex_data)
 {
 	int	fd1;
 
+	// TEST ACCESS
+	ft_printf("\t test: %s exist: %d\n", pipex_data->infile,
+		access(pipex_data->outfile, F_OK));
+
 	fd1 = load_file(pipex_data->infile);
+
+	// dup
+
 	ft_printf("fd1: %d\t", fd1);
 	close_file(fd1);
+
+	// execute
 }
 
 void	parent_process(t_pipex_data *pipex_data)
@@ -42,8 +51,9 @@ int	pipex_process(t_pipex_data *pipex_data)
 		// WAIT
 		int status = 0;
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status)) // TODO - more options
-			parent_process(pipex_data);
+		if (WIFEXITED(status) && WIFEXITED(status)) // TODO - more options
+			exit(WEXITSTATUS(status));
+		parent_process(pipex_data);
 
 		// ON FINISH LAUNCH PARENT
 
