@@ -1,31 +1,40 @@
 
 #include "pipex.h"
 
-void	child_process(t_pipex_data *pipex_data)
+void	child_process(t_pipex_data *pipex_data, int *pipefd)
 {
-	int	fd1;
+	int	infd;
+	// int	fd2;
 
 	// TEST ACCESS
-	ft_printf("\t test: %s exist: %d\n", pipex_data->infile,
-		access(pipex_data->outfile, F_OK));
+	if (access(pipex_data->outfile, F_OK))
+		ft_printf("can access");
 
-	fd1 = load_file(pipex_data->infile);
+	infd = open(pipex_data->infile, O_RDONLY);
 
 	// dup
+	dup2(infd, STDIN_FILENO);
+	dup2(pipefd[1], STDOUT_FILENO);
 
-	ft_printf("fd1: %d\t", fd1);
-	close_file(fd1);
+	// ft_printf("fd1: %d\t", fd1);
+	close_file(pipefd[0]);
 
 	// execute
+	// execve(pipex_data->)
+	char *filename = "/usr/bin/ls";
+	char *arguments[] = {"/usr/bin/ls", "-l", NULL};
+	char *env[] = { NULL };
+	if (execve(filename, arguments, env) == -1)
+		ft_printf("se produce un error");
 }
 
-void	parent_process(t_pipex_data *pipex_data)
+void	parent_process(t_pipex_data *pipex_data, int *pipefd)
 {
-	int	fd2;
+	int	outfd;
 
-	fd2 = load_file(pipex_data->outfile);
-	ft_printf("fd2: %d", fd2);
-	close_file(fd2);
+	outfd = load_file(pipex_data->outfile);
+	ft_printf("fd2: %d", outfd);
+	close_file(outfd);
 }
 
 int	pipex_process(t_pipex_data *pipex_data)
@@ -46,14 +55,14 @@ int	pipex_process(t_pipex_data *pipex_data)
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0) { // Proceso hijo
-		child_process(pipex_data);
+		child_process(pipex_data, pipefd);
 
 		// WAIT
 		int status = 0;
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status) && WIFEXITED(status)) // TODO - more options
 			exit(WEXITSTATUS(status));
-		parent_process(pipex_data);
+		parent_process(pipex_data, pipefd);
 
 		// ON FINISH LAUNCH PARENT
 

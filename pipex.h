@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/07 23:50:39 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/10 23:46:19 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_pipex_data
 
 
 void	dummy_function(void);
-int		load_file(char *file_path);
-void	close_file(int fd);
+// int		load_file(char *file_path);
+// void	close_file(int fd);
 
 int		tuberia(void);
 

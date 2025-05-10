@@ -6,39 +6,11 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/09 22:50:59 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/10 23:51:38 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-/*int check_files(const char *path1, int mode1, const char *path2, int mode2)
-{
-	ft_printf("\t test: %s exist: %d\n", path1, access(path1, F_OK));
-	ft_printf("\t test: %s exist: %d\n", path2, access(path2, R_OK | W_OK | X_OK));
-	return (access(path1, mode1));
-}*/
-
-// TODO - eliminar
-void	test(int argc, char **argv, char **envp, int param)
-{
-	ft_printf("\t test: %d %d %s\n", argc, param, envp[0]);
-	//infile = argv[params];
-	// TODO check files existence - what > does if files doesnt exist
-	// access(argv[params], F_OK);
-	ft_printf("\t test: %s %d\n", argv[param], access(argv[param], F_OK | R_OK | W_OK));
-	ft_printf("\t test: %s %d\n", argv[param], access(argv[param], R_OK | W_OK | X_OK));
-	
-	// TODO - example 
-	char *filename = "/usr/bin/ls";
-	char *arguments[] = {"/usr/bin/ls", "-l", NULL};
-	char *env[] = { NULL };
-	if (execve(filename, arguments, env) == -1)
-		ft_printf("se produce un error");
-
-	// TODO - create de pipes pipe(commad)
-	// TODO - wait until writting to the outfile
-}
 
 t_pipex_data	*process_parameters(t_pipex_data *pipex_data,
 					int argc, char **argv)
