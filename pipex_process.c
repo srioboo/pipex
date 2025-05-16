@@ -17,7 +17,8 @@ void	child_process(t_pipex_data *pipex_data, int *pipefd)
 	dup2(pipefd[1], STDOUT_FILENO);
 
 	// ft_printf("fd1: %d\t", fd1);
-	close_file(pipefd[0]);
+	//close_file(pipefd[0]);
+	close(pipefd[0]);
 
 	// execute
 	// execve(pipex_data->)
@@ -32,16 +33,17 @@ void	parent_process(t_pipex_data *pipex_data, int *pipefd)
 {
 	int	outfd;
 
-	outfd = load_file(pipex_data->outfile);
-	ft_printf("fd2: %d", outfd);
-	close_file(outfd);
+	// outfd = load_file(pipex_data->outfile);
+	outfd = open(pipex_data->outfile, O_RDONLY);
+	ft_printf("fd2: %d %d", outfd, pipefd);
+	close(outfd);
 }
 
 int	pipex_process(t_pipex_data *pipex_data)
 {
 	int		pipefd[2];
 	int		pid;
-	char	buffer[100];
+	// char	buffer[100];
 
 	if (pipe(pipefd) == -1)
 	{

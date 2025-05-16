@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:46:19 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:12:09 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	dummy_function(void);
 
 int		tuberia(void);
 
-void	child_process(t_pipex_data *pipex_data);
+void	child_process(t_pipex_data *pipex_data, int *pipefd);
 
-void	parent_process(t_pipex_data *pipex_data);
+void	parent_process(t_pipex_data *pipex_data, int *pipefd);
+
+int		pipex_process(t_pipex_data *pipex_data);
 
 #endif
