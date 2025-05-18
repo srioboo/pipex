@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/16 13:12:09 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:23:39 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
-
 # include "libft/src/libft.h"
 # include "libft/ft_printf/ft_printf.h"
+
+# define FALSE 0
+# define TRUE 1
+
+# ifndef DEBBUG
+#  define DEBBUG 0
+# endif
 
 typedef struct s_pipex_data
 {
@@ -31,17 +37,28 @@ typedef struct s_pipex_data
 	char	*program_b;
 }	t_pipex_data;
 
+/***************************************************/
+/* LOGS                                            */
+/***************************************************/
+void	ft_debug(const char *s, ...);
 
-void	dummy_function(void);
-// int		load_file(char *file_path);
-// void	close_file(int fd);
+void	ft_error(const char *s);
 
-int		tuberia(void);
+/***************************************************/
+/* UTILS                                           */
+/***************************************************/
+void	ft_free(char **str_arr);
 
-void	child_process(t_pipex_data *pipex_data, int *pipefd);
+char	*ft_find_path(const char *command, char **envp);
 
-void	parent_process(t_pipex_data *pipex_data, int *pipefd);
+/***************************************************/
+/* PROCESS                                         */
+/***************************************************/
 
-int		pipex_process(t_pipex_data *pipex_data);
+void	child_process(t_pipex_data *pipex_data, char **envp, int *pipefd);
+
+void	parent_process(t_pipex_data *pipex_data, char **envp, int *pipefd);
+
+int		pipex_process(t_pipex_data *pipex_data, char **envp);
 
 #endif

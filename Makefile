@@ -14,7 +14,7 @@ INCLUDES = -I./ -Ilibft/src -Ilibft/ft_printf
 # Source files
 SRCS = pipex.c \
 		pipex_process.c \
-		pipex_utils.c
+		pipex_utils.c pipex_log.c
 # Objects
 OBJS = $(SRCS:.c=.o )
 
