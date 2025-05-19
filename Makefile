@@ -41,9 +41,16 @@ libft:
 full-clean: fclean
 	@make -C libft full-clean
 
+debug: libft
+	$(CC) -D DEBBUG=1 $(SRCS) $(LIBFT) -o $(NAME)
+
+norma:
+	norminette *.c *.h
+# libft
+
 # test section
 test: libft
-	$(CC) $(CFLAGS) -D DEBBUG=1 $(SRCS) $(LIBFT) -o $(NAME)
+	$(CC) $(SRCS) $(LIBFT) -o $(NAME)
 
 # detect memory leaks
 sane: libft all
@@ -56,4 +63,4 @@ val: all
 vall: all
 	valgrind --leak-check=full --verbose --track-origins=yes --log-file=leaks.txt ./$(NAME)
 
-.PHONY: all clean fclean re test libft full-clean sane val vall
+.PHONY: all clean fclean re test libft full-clean sane val vall debug

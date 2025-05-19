@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/18 20:23:39 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:44:50 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_error(const char *s);
 void	ft_free(char **str_arr);
 
 char	*ft_find_path(const char *command, char **envp);
+
+void	ft_execute(char *argv, char **envp);
 
 /***************************************************/
 /* PROCESS                                         */

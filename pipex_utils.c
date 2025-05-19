@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/18 20:26:49 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/22 00:16:47 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_free(char **str_arr)
 		*str_arr = NULL;
 		str_arr++;
 	}
-	// TODO - free(**str_arr);
 	str_arr = NULL;
 }
 
@@ -42,7 +41,6 @@ void	ft_execute(char *argv, char **envp)
 			ft_free(commands);
 		exit(EXIT_FAILURE);
 	}
-	// TODO - improve command
 	path = ft_find_path(commands[0], envp);
 	if (!path)
 		ft_free(commands);
@@ -52,16 +50,29 @@ void	ft_execute(char *argv, char **envp)
 
 char	*ft_find_path(const char *command, char **envp)
 {
-	int	i;
+	int		i;
+	char	**paths;
+	char	*path;
+	char	*command_path;
 
-	ft_debug("FIND PATH %s %s", command, envp[0]);
 	i = 0;
-	while (ft_strnstr (envp[i], "PATH=", 5) == 0)
+	while (ft_strnstr (envp[++i], "PATH=", 5) == 0)
 	{
-		i++;
 		if (envp[i] == NULL)
 			ft_error("PATH NOT FOUND");
 	}
-	ft_debug("Path position: %d %s", i, envp[i]);
-	return ("");
+	paths = ft_split(envp[i] + 5, ':');
+	i = 0;
+	while (paths[i])
+	{
+		path = ft_strjoin(paths[i], "/");
+		command_path = ft_strjoin(path, command);
+		free(path);
+		if (access(command_path, F_OK) == 0)
+			return (command_path);
+		free(command_path);
+		i++;
+	}
+	ft_free(paths);
+	return (0);
 }
