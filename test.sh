@@ -1,6 +1,8 @@
 #!/bin/bash
 
-clear && make re
+clear
+make fclean
+make
 
 # EXEC="valgrind --leak-check=summary ./pipex"
 EXEC="./pipex" 
