@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clear && make re && make test
+clear && make re
 
 # printf "\nCopiar el contenido de infile en outfile\n"
 # ./pipex infile "cat" "cat" outfile
