@@ -53,3 +53,6 @@ dkms.conf
 
 # remove exec file from
 pipex
+
+# remove output files
+outfile*
