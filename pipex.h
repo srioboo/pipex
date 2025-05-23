@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/23 10:55:26 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:51:39 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 # define FALSE 0
 # define TRUE 1
 
-# ifndef DEBBUG
-#  define DEBBUG 0
-# endif
-
 typedef struct s_pipex_data
 {
 	char	*infile;
@@ -36,11 +32,6 @@ typedef struct s_pipex_data
 	char	*program_a;
 	char	*program_b;
 }	t_pipex_data;
-
-/***************************************************/
-/* LOGS                                            */
-/***************************************************/
-void	ft_debug(const char *s, ...);
 
 /***************************************************/
 /* UTILS                                           */

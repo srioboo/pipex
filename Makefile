@@ -14,8 +14,7 @@ INCLUDES = -I./ -Ilibft/src -Ilibft/ft_printf
 # Source files and objects
 SRCS = pipex.c \
 		pipex_process.c \
-		pipex_utils.c \
-		pipex_log.c
+		pipex_utils.c
 OBJS = $(SRCS:.c=.o )
 
 all: libft $(NAME)
@@ -45,7 +44,7 @@ libft-fclean:
 	@make -C ./libft -s fclean full-clean
 
 debug: libft
-	$(CC) -D DEBBUG=1 $(SRCS) $(LIBFT) -o $(NAME)
+	$(CC) $(SRCS) $(LIBFT) -o $(NAME)
 
 norm:
 	norminette *.c *.h
