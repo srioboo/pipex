@@ -66,7 +66,6 @@ function test-error1()
 {
 	printf "\n${GREEN}=== TEST: ${NC}Error not enough params\n"
 	${EXEC}  infile"" "     " $1
-	printf "\n"; echo $?
 	printf "${YELLOW}=== Result file: ${NC}$1\n\n"
 	cat $1
 	printf "\n${GREEN}=== END TEST${NC}\n\n"
@@ -76,7 +75,15 @@ function test-error2()
 {
 	printf "\n${GREEN}=== TEST: ${NC}Error empty command\n"
 	${EXEC} infile "ls" "" $1
-	printf "\n"; echo $?
+	printf "${YELLOW}=== Result file: ${NC}$1\n\n"
+	cat $1
+	printf "\n${GREEN}=== END TEST${NC}\n\n"
+}
+
+function test-error2()
+{
+	printf "\n${GREEN}=== TEST: ${NC}Error no infile\n"
+	${EXEC} nofile "ls" "cat" $1
 	printf "${YELLOW}=== Result file: ${NC}$1\n\n"
 	cat $1
 	printf "\n${GREEN}=== END TEST${NC}\n\n"
