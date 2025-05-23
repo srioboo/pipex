@@ -83,11 +83,13 @@ function test-error2()
 	printf "\n${GREEN}=== END TEST${NC}\n\n"
 }
 
-function test-error2()
+function test-error3()
 {
 	printf "\n${GREEN}=== TEST: ${NC}Error no infile\n"
 	${EXEC} nofile "ls" "cat" ${1}
+	ls < nofile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
+	diff ${1} ${1}-orig
 	printf "\n${GREEN}=== END TEST${NC}\n\n"
 }
 
@@ -96,5 +98,6 @@ test2 outfile-convert-letters
 test3 outfile-to-upper
 test4 outfile-count-words
 test5 outfile-order-alphabetical
-test-error1 outfile-test6
-test-error2 outfile-test7
+test-error1 outfile-error1
+test-error2 outfile-error2
+test-error3 outfile-error3
