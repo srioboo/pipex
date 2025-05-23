@@ -6,11 +6,17 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/22 00:16:47 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:54:56 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_error(const char *str)
+{
+	perror(str);
+	exit(EXIT_FAILURE);
+}
 
 void	ft_free(char **str_arr)
 {
