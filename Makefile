@@ -1,24 +1,24 @@
 # name
 NAME = pipex
 
-# Compile
+# Compile and other commands
 CC = @cc
 CFLAGS = -Wall -Wextra -Werror
-# Other comands
 AR = @ar rcs
 RM = @rm
+
 # Libft include
-LIBFT = -Llibft -l:libft.a
+LIBFT = ./libft/libft.a
 INCLUDES = -I./ -Ilibft/src -Ilibft/ft_printf
 
-# Source files
+# Source files and objects
 SRCS = pipex.c \
 		pipex_process.c \
-		pipex_utils.c pipex_log.c
-# Objects
+		pipex_utils.c \
+		pipex_log.c
 OBJS = $(SRCS:.c=.o )
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
@@ -29,28 +29,23 @@ $(NAME): $(OBJS)
 clean:
 	$(RM) $(OBJS)
 
-fclean: clean
+fclean: libft-clean clean
 	$(RM) $(NAME)
 
 re: fclean all
 
 # libft build and full project clean
 libft:
-	@make -C libft full
+	@make -C ./libft -s full
 
-full-clean: fclean
-	@make -C libft full-clean
+libft-clean:
+	@make -C ./libft -s fclean full-clean
 
 debug: libft
 	$(CC) -D DEBBUG=1 $(SRCS) $(LIBFT) -o $(NAME)
 
-norma:
+norm:
 	norminette *.c *.h
-# libft
-
-# test section
-test: libft
-	$(CC) $(SRCS) $(LIBFT) -o $(NAME)
 
 # detect memory leaks
 sane: libft all
