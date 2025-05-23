@@ -19,78 +19,78 @@ NC="\033[m"
 
 function test1()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Copy infile content into outfile\n"
+	printf "\n${BLUE}=== TEST: ${NC}Copy infile content into outfile\n"
 	${EXEC} infile "cat" "cat" ${1}
 	cat < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
 	diff ${1} ${1}-orig
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 function test2()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Convert all \"a\" letter into \"o\"\n"
+	printf "\n${BLUE}=== TEST: ${NC}Convert all \"a\" letter into \"o\"\n"
 	${EXEC} infile "tr 'a' 'o'" "cat" ${1}
 	tr 'a' 'o' < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
 	diff ${1} ${1}-orig
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 function test3()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Convert to upper\n"
+	printf "\n${BLUE}=== TEST: ${NC}Convert to upper\n"
 	${EXEC} infile "tr 'a-z' 'A-Z'" "cat" ${1}
 	tr 'a-z' 'A-Z' < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
 	diff ${1} ${1}-orig
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 function test4()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Count words\n"
+	printf "\n${BLUE}=== TEST: ${NC}Count words\n"
 	${EXEC} infile "cat" "wc -w" ${1}
 	cat < infile | wc -w > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
 	diff ${1} ${1}-orig
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 function test5()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Order alphabetical the file content\n"
+	printf "\n${BLUE}=== TEST: ${NC}Order alphabetical the file content\n"
 	${EXEC} infile "sort" "cat" ${1}
 	sort < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	diff ${1} ${1}-orig; echo $?
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 function test-error1()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Error not enough params\n"
+	printf "\n${BLUE}=== TEST: ${NC}Error not enough params\n"
 	${EXEC}  infile"" "     " ${1}
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 } 
 
 function test-error2()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Error empty command\n"
+	printf "\n${BLUE}=== TEST: ${NC}Error empty command\n"
 	${EXEC} infile "ls" "" ${1}
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 function test-error3()
 {
-	printf "\n${GREEN}=== TEST: ${NC}Error no infile\n"
+	printf "\n${BLUE}=== TEST: ${NC}Error no infile\n"
 	${EXEC} nofile "ls" "cat" ${1}
 	ls < nofile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
 	diff ${1} ${1}-orig
-	printf "\n${GREEN}=== END TEST${NC}\n\n"
+	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
 test1 outfile-cat
