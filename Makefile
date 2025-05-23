@@ -26,10 +26,10 @@ $(NAME): $(OBJS)
 %c: %.o
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
+clean: libft-clean
 	$(RM) $(OBJS)
 
-fclean: libft-clean clean
+fclean: libft-fclean clean
 	$(RM) $(NAME)
 
 re: fclean all
@@ -39,6 +39,9 @@ libft:
 	@make -C ./libft -s full
 
 libft-clean:
+	@make -C ./libft -s clean full-clean
+
+libft-fclean:
 	@make -C ./libft -s fclean full-clean
 
 debug: libft
@@ -58,4 +61,4 @@ val: all
 vall: all
 	valgrind --leak-check=full --verbose --track-origins=yes --log-file=leaks.txt ./$(NAME)
 
-.PHONY: all clean fclean re test libft full-clean sane val vall debug
+.PHONY: all clean fclean re libft libft-clean libft-fclean sane val vall debug
