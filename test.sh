@@ -2,7 +2,7 @@
 
 clear
 make fclean
-make
+make $1
 
 # EXEC="valgrind --leak-check=summary ./pipex"
 EXEC="./pipex" 
@@ -62,12 +62,30 @@ function test5()
 	printf "\n${GREEN}=== END TEST${NC}\n\n"
 }
 
-# % ${EXEC}  infile"" "     " out.txt
-# % ${EXEC} infile "ls" "" out.txt
+function test-error1()
+{
+	printf "\n${GREEN}=== TEST: ${NC}Error not enough params\n"
+	${EXEC}  infile"" "     " $1
+	printf "\n"; echo $?
+	printf "${YELLOW}=== Result file: ${NC}$1\n\n"
+	cat $1
+	printf "\n${GREEN}=== END TEST${NC}\n\n"
+} 
+
+function test-error2()
+{
+	printf "\n${GREEN}=== TEST: ${NC}Error empty command\n"
+	${EXEC} infile "ls" "" $1
+	printf "\n"; echo $?
+	printf "${YELLOW}=== Result file: ${NC}$1\n\n"
+	cat $1
+	printf "\n${GREEN}=== END TEST${NC}\n\n"
+}
 
 test1 outfile-cat.txt
 test2 outfile-convert-letters.txt
 test3 outfile-to-upper.txt
 test4 outfile-count-words.txt
 test5 outfile-order-alphabetical.txt
-# test6
+test-error1 outfile-test6.txt
+test-error2 outfile-test7.txt
