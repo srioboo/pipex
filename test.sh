@@ -17,13 +17,25 @@ GRAY='\033[1;30m'
 WHITE='\033[1;37m'
 NC="\033[m"
 
+function show_result()
+{
+	if test $1 -eq 1
+	then
+		printf "${RED}KO: error in test"
+	else
+		printf "${GREE}SUCCESS"
+	fi
+}
+
 function test1()
 {
 	printf "\n${BLUE}=== TEST: ${NC}Copy infile content into outfile\n"
 	${EXEC} infile "cat" "cat" ${1}
 	cat < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig
+	diff -u ${1} ${1}-orig
+	status=$?
+	show_result $status
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
@@ -33,7 +45,9 @@ function test2()
 	${EXEC} infile "tr 'a' 'o'" "cat" ${1}
 	tr 'a' 'o' < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig
+	diff -u ${1} ${1}-orig
+	status=$?
+	show_result $status
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
@@ -43,7 +57,9 @@ function test3()
 	${EXEC} infile "tr 'a-z' 'A-Z'" "cat" ${1}
 	tr 'a-z' 'A-Z' < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig
+	diff -u ${1} ${1}-orig
+	status=$?
+	show_result $status
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
@@ -53,7 +69,9 @@ function test4()
 	${EXEC} infile "cat" "wc -w" ${1}
 	cat < infile | wc -w > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig
+	diff -u ${1} ${1}-orig
+	status=$?
+	show_result $status
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
@@ -63,7 +81,9 @@ function test5()
 	${EXEC} infile "sort" "cat" ${1}
 	sort < infile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig; echo $?
+	diff -u ${1} ${1}-orig
+	status=$?
+	show_result $status
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
@@ -89,7 +109,9 @@ function test-error3()
 	${EXEC} nofile "ls" "cat" ${1}
 	ls < nofile | cat > ${1}-orig
 	printf "${YELLOW}=== Result file: ${NC}${1}\n\n"
-	diff ${1} ${1}-orig
+	diff -u ${1} ${1}-orig
+	status=$?
+	show_result $status
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
