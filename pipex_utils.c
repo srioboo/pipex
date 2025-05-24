@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/24 19:41:34 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/24 23:41:48 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 void	ft_error(char *str)
 {
-	ft_putstr_fd (str, 2);
+	ft_printf(str);
+	ft_printf("\n");
 	exit(EXIT_FAILURE);
 }
 
 void	ft_free(char **str_arr)
 {
-	while (**str_arr)
+	int	i;
+
+	if (!str_arr)
+		return ;
+	i = 0;
+	while (str_arr[i] != NULL)
 	{
-		free(*str_arr);
-		*str_arr = NULL;
-		str_arr++;
+		free(str_arr[i]);
+		i++;
 	}
-	str_arr = NULL;
+	free(str_arr);
 }
 
 void	ft_execute(char *command, char **envp)
@@ -35,18 +40,20 @@ void	ft_execute(char *command, char **envp)
 	char	*path;
 
 	if (!command || *command == '\0')
-		ft_error ("Error the command is empty\n");
-
+		ft_error("Error the command is empty");
 	parsed_command = ft_split(command, ' ');
 	if (!parsed_command || !parsed_command[0])
 	{
 		if (parsed_command)
 			ft_free(parsed_command);
-		ft_error ("Error command invalid\n");
+		ft_error ("Error command invalid");
 	}
 	path = ft_find_path(parsed_command[0], envp);
 	if (!path)
+	{
 		ft_free(parsed_command);
+		ft_error("Error command not found");
+	}
 	if (execve(path, parsed_command, envp) == -1)
 		ft_error("Error executing command");
 }
@@ -58,7 +65,7 @@ char	*ft_find_path(const char *command, char **envp)
 	char	*path;
 	char	*command_path;
 
-	i = 0;
+	i = -1;
 	while (ft_strnstr (envp[++i], "PATH=", 5) == 0)
 	{
 		if (envp[i] == NULL)
@@ -77,7 +84,7 @@ char	*ft_find_path(const char *command, char **envp)
 		i++;
 	}
 	ft_free(paths);
-	return (0);
+	return (NULL);
 }
 
 void	ft_open_files(t_pipex_data **pipex_data)
