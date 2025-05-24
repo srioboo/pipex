@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/24 18:59:03 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:01:40 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	pipex(int argc, char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	if (argc >= 5)
+	if (argc == 5)
 		pipex(argc, argv, envp);
 	else
-		ft_printf("Not enought params!");
+		ft_printf("Incorrect number of parameters!\n");
 	return (0);
 }
