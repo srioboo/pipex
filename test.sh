@@ -23,7 +23,7 @@ function show_result()
 	then
 		printf "${RED}KO: error in test"
 	else
-		printf "${GREE}SUCCESS"
+		printf "${GREEN}SUCCESS"
 	fi
 }
 

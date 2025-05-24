@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/23 10:54:56 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:13:15 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,15 @@ char	*ft_find_path(const char *command, char **envp)
 	}
 	ft_free(paths);
 	return (0);
+}
+
+void	ft_open_files(t_pipex_data **pipex_data)
+{
+	if (access((*pipex_data)->infile, F_OK) == -1)
+		ft_error("Can't access infile");
+	(*pipex_data)->infd = open((*pipex_data)->infile, O_RDONLY, 0777);
+	if ((*pipex_data)->infd == -1)
+		ft_error("Error opening infile file");
+	(*pipex_data)->outfd = open((*pipex_data)->outfile,
+			O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
 }
