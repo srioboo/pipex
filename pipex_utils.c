@@ -6,15 +6,15 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/24 11:13:15 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:41:34 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_error(const char *str)
+void	ft_error(char *str)
 {
-	perror(str);
+	ft_putstr_fd (str, 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -29,29 +29,26 @@ void	ft_free(char **str_arr)
 	str_arr = NULL;
 }
 
-void	ft_execute(char *argv, char **envp)
+void	ft_execute(char *command, char **envp)
 {
-	char	**commands;
+	char	**parsed_command;
 	char	*path;
 
-	if (!argv || *argv == '\0')
+	if (!command || *command == '\0')
+		ft_error ("Error the command is empty\n");
+
+	parsed_command = ft_split(command, ' ');
+	if (!parsed_command || !parsed_command[0])
 	{
-		ft_putstr_fd ("Error: Empty command\n", 2);
-		exit(EXIT_FAILURE);
+		if (parsed_command)
+			ft_free(parsed_command);
+		ft_error ("Error command invalid\n");
 	}
-	commands = ft_split(argv, ' ');
-	if (!commands || !commands[0])
-	{
-		ft_putstr_fd ("Error: Invalid command\n", 2);
-		if (commands)
-			ft_free(commands);
-		exit(EXIT_FAILURE);
-	}
-	path = ft_find_path(commands[0], envp);
+	path = ft_find_path(parsed_command[0], envp);
 	if (!path)
-		ft_free(commands);
-	if (execve(path, commands, envp) == -1)
-		ft_error("executing command");
+		ft_free(parsed_command);
+	if (execve(path, parsed_command, envp) == -1)
+		ft_error("Error executing command");
 }
 
 char	*ft_find_path(const char *command, char **envp)
