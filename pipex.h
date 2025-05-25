@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/24 19:17:08 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 08:48:22 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,30 @@ typedef struct s_pipex_data
 	char	*program_b;
 }	t_pipex_data;
 
-/***************************************************/
-/* UTILS                                           */
-/***************************************************/
+/******************************************************************************/
+/* MEM                                                                        */
+/******************************************************************************/
+
+void	ft_error(char *str, t_pipex_data *pipex_data);
+
 void	ft_free(char **str_arr);
 
-char	*ft_find_path(const char *command, char **envp);
+void	ft_free_pipex_data(t_pipex_data *pipex_data);
 
-void	ft_execute(char *command, char **envp);
+/******************************************************************************/
+/* UTILS                                                                      */
+/******************************************************************************/
 
-void	ft_error(char *s);
+char	*ft_find_path(t_pipex_data *pipex_data,
+			const char *command, char **envp);
+
+void	ft_execute(t_pipex_data *pipex_data, char *command, char **envp);
 
 void	ft_open_files(t_pipex_data **pipex_data);
 
-/***************************************************/
-/* PROCESS                                         */
-/***************************************************/
+/******************************************************************************/
+/* PROCESS                                                                    */
+/******************************************************************************/
 
 void	child_process(t_pipex_data *pipex_data, char **envp, int *pipefd);
 

@@ -6,59 +6,39 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/24 23:41:48 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 10:45:28 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_error(char *str)
-{
-	ft_printf(str);
-	ft_printf("\n");
-	exit(EXIT_FAILURE);
-}
-
-void	ft_free(char **str_arr)
-{
-	int	i;
-
-	if (!str_arr)
-		return ;
-	i = 0;
-	while (str_arr[i] != NULL)
-	{
-		free(str_arr[i]);
-		i++;
-	}
-	free(str_arr);
-}
-
-void	ft_execute(char *command, char **envp)
+void	ft_execute(t_pipex_data *pipex_data, char *command, char **envp)
 {
 	char	**parsed_command;
 	char	*path;
 
 	if (!command || *command == '\0')
-		ft_error("Error the command is empty");
+		ft_error("Error the command is empty", pipex_data);
 	parsed_command = ft_split(command, ' ');
 	if (!parsed_command || !parsed_command[0])
 	{
 		if (parsed_command)
 			ft_free(parsed_command);
-		ft_error ("Error command invalid");
+		ft_error ("Error command invalid", pipex_data);
 	}
-	path = ft_find_path(parsed_command[0], envp);
+	path = ft_find_path(pipex_data, parsed_command[0], envp);
 	if (!path)
 	{
-		ft_free(parsed_command);
-		ft_error("Error command not found");
+		if (parsed_command)
+			ft_free(parsed_command);
+		ft_error("Error command not found", pipex_data);
 	}
 	if (execve(path, parsed_command, envp) == -1)
-		ft_error("Error executing command");
+		ft_error("Error executing command", pipex_data);
 }
 
-char	*ft_find_path(const char *command, char **envp)
+char	*ft_find_path(t_pipex_data *pipex_data,
+				const char *command, char **envp)
 {
 	int		i;
 	char	**paths;
@@ -69,7 +49,7 @@ char	*ft_find_path(const char *command, char **envp)
 	while (ft_strnstr (envp[++i], "PATH=", 5) == 0)
 	{
 		if (envp[i] == NULL)
-			ft_error("PATH NOT FOUND");
+			ft_error("PATH NOT FOUND", pipex_data);
 	}
 	paths = ft_split(envp[i] + 5, ':');
 	i = 0;
@@ -90,10 +70,10 @@ char	*ft_find_path(const char *command, char **envp)
 void	ft_open_files(t_pipex_data **pipex_data)
 {
 	if (access((*pipex_data)->infile, F_OK) == -1)
-		ft_error("Can't access infile");
+		ft_error("Can't access infile", (*pipex_data));
 	(*pipex_data)->infd = open((*pipex_data)->infile, O_RDONLY, 0777);
 	if ((*pipex_data)->infd == -1)
-		ft_error("Error opening infile file");
+		ft_error("Error opening infile file", (*pipex_data));
 	(*pipex_data)->outfd = open((*pipex_data)->outfile,
 			O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
 }
