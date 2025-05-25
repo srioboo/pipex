@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:11:28 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 10:49:53 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:28:40 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 		ft_error("An error creating pipe has happend", pipex_data);
 	pid = fork();
 	if (pid == -1)
-		ft_error("Error creating child proccess", pipex_data);
+		ft_error("Creating child proccess", pipex_data);
 	if (pid == 0)
 		child_process(pipex_data, envp, pipefd);
 	waitpid(pid, &status, 0);

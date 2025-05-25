@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 10:51:22 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:07:27 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	ft_error(char *str, t_pipex_data *pipex_data)
 {
 	ft_free_pipex_data(pipex_data);
-	ft_printf(str);
-	ft_printf("\n");
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
 	exit(EXIT_FAILURE);
 }
 

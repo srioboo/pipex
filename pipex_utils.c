@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 10:45:28 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:29:38 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ void	ft_execute(t_pipex_data *pipex_data, char *command, char **envp)
 	char	*path;
 
 	if (!command || *command == '\0')
-		ft_error("Error the command is empty", pipex_data);
+		ft_error("Command is empty", pipex_data);
 	parsed_command = ft_split(command, ' ');
 	if (!parsed_command || !parsed_command[0])
 	{
 		if (parsed_command)
 			ft_free(parsed_command);
-		ft_error ("Error command invalid", pipex_data);
+		ft_error("Command invalid", pipex_data);
 	}
 	path = ft_find_path(pipex_data, parsed_command[0], envp);
 	if (!path)
 	{
 		if (parsed_command)
 			ft_free(parsed_command);
-		ft_error("Error command not found", pipex_data);
+		ft_error("Command not found", pipex_data);
 	}
 	if (execve(path, parsed_command, envp) == -1)
-		ft_error("Error executing command", pipex_data);
+		ft_error("Executing command", pipex_data);
 }
 
 char	*ft_find_path(t_pipex_data *pipex_data,
@@ -49,7 +49,7 @@ char	*ft_find_path(t_pipex_data *pipex_data,
 	while (ft_strnstr (envp[++i], "PATH=", 5) == 0)
 	{
 		if (envp[i] == NULL)
-			ft_error("PATH NOT FOUND", pipex_data);
+			ft_error("Path not found", pipex_data);
 	}
 	paths = ft_split(envp[i] + 5, ':');
 	i = 0;
@@ -73,7 +73,7 @@ void	ft_open_files(t_pipex_data **pipex_data)
 		ft_error("Can't access infile", (*pipex_data));
 	(*pipex_data)->infd = open((*pipex_data)->infile, O_RDONLY, 0777);
 	if ((*pipex_data)->infd == -1)
-		ft_error("Error opening infile file", (*pipex_data));
+		ft_error("Opening infile file", (*pipex_data));
 	(*pipex_data)->outfd = open((*pipex_data)->outfile,
 			O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
 }
