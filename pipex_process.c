@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:11:28 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 13:28:40 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:45:10 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 	if (WIFEXITED(status) && WEXITSTATUS(status))
 		exit(WEXITSTATUS(status));
 	parent_process(pipex_data, envp, pipefd);
-	// ft_free_pipex_data(pipex_data);
 	return (0);
 }

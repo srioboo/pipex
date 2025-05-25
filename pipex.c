@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:23:06 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 16:06:13 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:45:24 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	pipex(int argc, char **argv, char **envp)
 		pipex_data = NULL;
 	process_parameters(&pipex_data, argc, argv);
 	pipex_process(pipex_data, envp);
+	ft_free_pipex_data(pipex_data);
 }
 
 int	main(int argc, char **argv, char **envp)

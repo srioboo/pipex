@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 16:07:27 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:44:33 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,5 @@ void	ft_free_pipex_data(t_pipex_data *pipex_data)
 {
 	if (!pipex_data)
 		return ;
-	/*if (pipex_data->infile != NULL)
-		free(pipex_data->infile);
-	if (pipex_data->outfile != NULL)
-		free(pipex_data->outfile);
-	if (pipex_data->program_a != NULL)
-		free(pipex_data->program_a);
-	if (pipex_data->program_b != NULL)
-		free(pipex_data->program_b);*/
 	free(pipex_data);
 }
