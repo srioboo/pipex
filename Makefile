@@ -3,12 +3,15 @@ NAME = pipex
 
 # Compile and other commands
 CC = @cc
+MAKE = @make -C
 CFLAGS = -Wall -Wextra -Werror
 AR = @ar rcs
 RM = @rm
+SFLAG = -s
 
 # Libft include
-LIBFT = ./libft/libft.a
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I./ -Ilibft/src -Ilibft/ft_printf
 
 # Source files and objects
@@ -23,7 +26,7 @@ all: libft $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
-%c: %.o
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: libft-clean
@@ -36,13 +39,13 @@ re: fclean all
 
 # libft build and full project clean
 libft:
-	@make -C ./libft -s full
+	$(MAKE) $(LIBFT_DIR) $(SFLAG) full
 
 libft-clean:
-	@make -C ./libft -s clean full-clean
+	$(MAKE) $(LIBFT_DIR) $(SFLAG) clean full-clean
 
 libft-fclean:
-	@make -C ./libft -s fclean full-clean
+	$(MAKE) $(LIBFT_DIR) $(SFLAG) fclean full-clean
 
 debug: libft
 	$(CC) $(SRCS) $(LIBFT) -o $(NAME)
