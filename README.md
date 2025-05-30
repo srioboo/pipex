@@ -15,14 +15,25 @@ Launch test.sh for some formated tests
 Your project must comply with the following rules:
 - [x] You must submit a Makefile that compiles your source files. It must not perform
 unnecessary relinking.
-- [ ] Your program must never terminate unexpectedly (e.g., segmentation fault, bus
+- [X] Your program must never terminate unexpectedly (e.g., segmentation fault, bus
 error, double free, etc.).
 - [X] Your program must not have memory leaks.
-- [ ] If you are unsure, handle errors the same way as the shell command:
+- [X] If you are unsure, handle errors the same way as the shell command:
 
 	```shell
 	< file1 cmd1 | cmd2 > file2
 	```
+
+## Clear for release
+
+- [] review make
+- [] review test -> fail ./pipex infile"" "    " outfile
+- [] review valgrind
+- [] clear outputs
+- [] Delete outfile
+- [] Delete test.sh
+- [] Delete this README.md
+
 
 ## Notes
 
