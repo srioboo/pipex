@@ -26,6 +26,8 @@ error, double free, etc.).
 
 ## Clear for release
 
+- [] ignore .gitignore
+- [] norminette
 - [] review make
 - [] review test -> fail ./pipex infile"" "    " outfile
 - [] review valgrind
