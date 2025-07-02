@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/30 22:54:45 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:44:15 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ void	ft_free(char **str_arr)
 
 void	ft_free_pipex_data(t_pipex_data *pipex_data)
 {
-
-	// if (access(pipex_data->infile, F_OK) == -1)
-	// 	ft_error("PRUEBA", pipex_data);
-
-	// if (access(pipex_data->outfile, F_OK) == -1)
-	// 	ft_error("PRUEBA1", pipex_data);
-
 	if (!(pipex_data->infile))
 		free(pipex_data->infile);
 	if (!(pipex_data->outfile))

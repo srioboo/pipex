@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/26 10:02:14 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:33:44 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ void	ft_open_files(t_pipex_data **pipex_data)
 	if ((*pipex_data)->infd == -1)
 		ft_error("Opening infile file", (*pipex_data));
 	(*pipex_data)->outfd = open((*pipex_data)->outfile,
-			O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
+			O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if ((*pipex_data)->outfd == -1)
+		ft_error("Opening outfile file", (*pipex_data));
 }

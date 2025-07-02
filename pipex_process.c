@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:11:28 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 16:45:10 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:08:31 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	child_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 	dup2(pipex_data->infd, STDIN_FILENO);
 	dup2(pipefd[1], STDOUT_FILENO);
 	close(pipefd[0]);
+	close(pipefd[1]);
+	close(pipex_data->infd);
+	close(pipex_data->outfd);
 	ft_execute(pipex_data, pipex_data->program_a, envp);
 }
 
@@ -24,7 +27,10 @@ void	parent_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 {
 	dup2(pipefd[0], STDIN_FILENO);
 	dup2(pipex_data->outfd, STDOUT_FILENO);
+	close(pipefd[0]);
 	close(pipefd[1]);
+	close(pipex_data->infd);
+	close(pipex_data->outfd);
 	ft_execute(pipex_data, pipex_data->program_b, envp);
 }
 
@@ -42,6 +48,7 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 		ft_error("Creating child proccess", pipex_data);
 	if (pid == 0)
 		child_process(pipex_data, envp, pipefd);
+	close(pipefd[1]);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status) && WEXITSTATUS(status))
 		exit(WEXITSTATUS(status));

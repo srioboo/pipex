@@ -4,7 +4,7 @@ NAME = pipex
 # Compile and other commands
 CC = @cc
 MAKE = @make -C
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 AR = @ar rcs
 RM = @rm
 SFLAG = -s
