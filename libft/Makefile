@@ -6,9 +6,18 @@
 #    By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 16:30:18 by srioboo-          #+#    #+#              #
-#    Updated: 2025/03/01 00:31:23 by srioboo-         ###   ########.fr        #
+#    Updated: 2025/07/05 22:34:40 by srioboo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Colors
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_BLUE=\033[0;34m
+COLOUR_YELLOW= \033[33m
+COLOUR_MAGENTA=\033[35m
+COLOUR_TURQUOISE=\033[36m	
+COLOUR_END=\033[0m
 
 # library name
 NAME = libft.a
@@ -93,6 +102,7 @@ $(NAME): $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(COLOUR_BLUE)Compiling: $(COLOUR_END)$<"
 
 bonus: $(OBJECTS) $(BONUS_OBJECTS)
 	$(AR) $(NAME) $?

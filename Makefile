@@ -1,3 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/07/05 22:29:52 by srioboo-          #+#    #+#              #
+#    Updated: 2025/07/05 22:34:03 by srioboo-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# Colors
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_BLUE=\033[0;34m
+COLOUR_YELLOW= \033[33m
+COLOUR_MAGENTA=\033[35m
+COLOUR_TURQUOISE=\033[36m	
+COLOUR_END=\033[0m
+
 # name
 NAME = pipex
 
@@ -21,13 +42,15 @@ SRCS = pipex.c \
 		pipex_utils.c
 OBJS = $(SRCS:.c=.o )
 
-all: libft $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+$(NAME): libft $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "$(COLOUR_GREEN)\n$(NAME) compiled!\n$(COLOUR_END)"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(COLOUR_BLUE)Compiling: $(COLOUR_END)$<"
 
 clean: libft-clean
 	$(RM) $(OBJS)
@@ -40,6 +63,8 @@ re: fclean all
 # libft build and full project clean
 libft:
 	$(MAKE) $(LIBFT_DIR) $(SFLAG) full
+	@echo "$(COLOUR_YELLOW)Compiling Libft $(COLOUR_END)"
+	@echo "$(COLOUR_GREEN)\nlibft compiled!\n$(COLOUR_END)"
 
 libft-clean:
 	$(MAKE) $(LIBFT_DIR) $(SFLAG) clean full-clean
