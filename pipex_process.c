@@ -41,6 +41,7 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 	pid_t	pid;
 	int		status;
 
+	ft_open_files(&pipex_data);
 	if (pipe(pipefd) == -1)
 		ft_error("An error creating pipe has happend", pipex_data);
 	pid = fork();
