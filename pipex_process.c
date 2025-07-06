@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:11:28 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/07/12 11:12:57 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 13:03:01 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,26 @@ void	parent_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 int	pipex_process(t_pipex_data *pipex_data, char **envp)
 {
 	int		pipefd[2];
-	pid_t	pid;
+	pid_t	pid1;
+	pid_t	pid2;
 	int		status;
 
 	ft_open_files(&pipex_data);
 	if (pipe(pipefd) == -1)
 		ft_error("An error creating pipe has happend", pipex_data);
-	pid = fork();
-	if (pid == -1)
+	pid1 = fork();
+	if (pid1 < 0)
 		ft_error("Creating child proccess", pipex_data);
-	if (pid == 0)
+	if (pid1 == 0)
 		child_process(pipex_data, envp, pipefd);
-	waitpid(pid, &status, 0);
-	parent_process(pipex_data, envp, pipefd);
-	if (WIFEXITED(status) && WEXITSTATUS(status))
-		exit(WEXITSTATUS(status));
+	pid2 = fork();
+	if (pid2 < 0)
+		ft_error("Creating second child proccess", pipex_data);
+	if (pid2 == 0)
+		parent_process(pipex_data, envp, pipefd);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(pid1, &status, 0);
+	waitpid(pid2, &status, 0);
 	return (0);
 }
