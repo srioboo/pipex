@@ -36,7 +36,7 @@ function test_base()
 	local cmd2=$4
 	local outfile=$5
 	local infile=$2
-	
+
 	printf "\n${BLUE}=== TEST ${test_num}: ${NC}${test_desc}\n"
 	${EXEC} ${infile} "${cmd1}" "${cmd2}" ${outfile}
 	${cmd1} < ${infile} | ${cmd2} > ${outfile}-orig
@@ -99,10 +99,10 @@ function test-error5()
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
-test_base "0.1" infile "cat" "cat" outfile-cat "Copy infile content into outfile" 
+test_base "0.1" infile "cat" "cat" outfile-cat "Copy infile content into outfile"
 test_base "0.2" infile "tr 'a' 'o'" "cat" outfile-to-upper "Convert all \"a\" letter into \"o\""
 test_base "0.3" infile "tr 'a-z' 'A-Z'" "cat" outfile-to-upper "Convert to upper"
-test_base "0.4" infile "cat" "wc -w" outfile-count-words "Count words" 
+test_base "0.4" infile "cat" "wc -w" outfile-count-words "Count words"
 test_base "0.5" infile "sort" "cat" outfile-order-alphabetical "Order alphabetical the file content"
 
 # test-error1 outfile-error1
@@ -111,10 +111,10 @@ test_base "0.5" infile "sort" "cat" outfile-order-alphabetical "Order alphabetic
 # test-error4	outfile
 # test-error5	outfile
 
-test_base "0" infile "date +%H:%M:%S" "cat" outfile infile "Muestra fecha" 
+test_base "0" infile "date +%H:%M:%S" "cat" outfile infile "Muestra fecha"
 test_base "1" infile "ls -l" "wc -l" outfile "Lista los archivos de infile, redirige la salida a wc -l y guarda el resultado en outfile."
 test_base "2" infile "cat" "grep de" outfile  "Usa cat para mostrar el contenido de infile, filtra las líneas que contienen \"text\" con grep, y guarda el resultado en outfile"
-test_base "3" infile "head -n 3" "rev" outfile "Toma las primeras 3 líneas de infile y las invierte con rev." 
+test_base "3" infile "head -n 3" "rev" outfile "Toma las primeras 3 líneas de infile y las invierte con rev."
 # Comandos de errores
 test_base "4" nofile "ls -l" "wc -l" outfile "Error: El archivo de entrada nofile no existe."
 test_base "5" infile "invalidcmd" "wc -l" outfile "Error: El comando invalidcmd no es válido."
