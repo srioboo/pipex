@@ -6,13 +6,13 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:11:28 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/07/12 13:03:01 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 13:04:40 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
+void	first_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 {
 	pipex_data->infd = open(pipex_data->infile, O_RDONLY, 0644);
 	if (pipex_data->infd == -1)
@@ -23,7 +23,7 @@ void	child_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 	ft_execute(pipex_data, pipex_data->program_a, envp);
 }
 
-void	parent_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
+void	second_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 {
 	pipex_data->outfd = open(pipex_data->outfile,
 			O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -40,7 +40,7 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 	int		pipefd[2];
 	pid_t	pid1;
 	pid_t	pid2;
-	int		status;
+	// int		status;
 
 	ft_open_files(&pipex_data);
 	if (pipe(pipefd) == -1)
@@ -49,15 +49,20 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 	if (pid1 < 0)
 		ft_error("Creating child proccess", pipex_data);
 	if (pid1 == 0)
-		child_process(pipex_data, envp, pipefd);
+	{
+			first_process(pipex_data, envp, pipefd);
+			waitpid(pid1, NULL, 0);
+	}
+	close(pipefd[1]);
+	// pipex_data->
 	pid2 = fork();
 	if (pid2 < 0)
 		ft_error("Creating second child proccess", pipex_data);
 	if (pid2 == 0)
-		parent_process(pipex_data, envp, pipefd);
+		second_process(pipex_data, envp, pipefd);
 	close(pipefd[0]);
-	close(pipefd[1]);
-	waitpid(pid1, &status, 0);
-	waitpid(pid2, &status, 0);
+	// close(pipefd[1]);
+	// waitpid(pid1, &status, 0);
+	waitpid(pid2, NULL, 0);
 	return (0);
 }
