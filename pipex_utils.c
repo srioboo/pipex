@@ -77,5 +77,5 @@ void	ft_open_files(t_pipex_data **pipex_data)
 	if ((*pipex_data)->infd == -1)
 		ft_error("Opening infile file", (*pipex_data));
 	(*pipex_data)->outfd = open((*pipex_data)->outfile,
-			O_RDONLY | O_WRONLY | O_CREAT | O_TRUNC, 0777);
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 }
