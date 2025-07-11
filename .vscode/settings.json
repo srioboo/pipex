@@ -23,6 +23,7 @@
 		"*.test": "makefile",
 		".editorconfig": "c",
 		"ft_printf.h": "c",
-		"stdarg.h": "c"
+		"stdarg.h": "c",
+		"pipex.h": "c"
 	}
 }
