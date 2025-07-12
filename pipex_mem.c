@@ -6,16 +6,16 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/07/12 13:05:49 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 13:07:56 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_perror(int error_code)
+void	ft_perror()
 {
-	perror("ERROR");
-	exit (error_code);
+	perror ("ERROR");
+	exit (EXIT_FAILURE);
 }
 
 void	ft_error(char *str, t_pipex_data *pipex_data)
