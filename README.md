@@ -42,6 +42,8 @@ error, double free, etc.).
 https://github.com/a-ctn-a
 https://github.com/emiliux136/Pipex/blob/main/esquema_emilgarc_pipex.pdf
 https://github.com/gabcollet/pipex/blob/master/srcs/pipex.c
+https://github.com/Tobiianselmo/Pipex/tree/master/src
+https://github.com/PabloMzGa/42-pipex/tree/main
 
 https://csnotes.medium.com/pipex-tutorial-42-project-4469f5dd5901
 
