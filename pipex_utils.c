@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:21:45 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/07/12 13:05:01 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 13:06:20 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,10 @@ char	*ft_find_path(t_pipex_data *pipex_data,
 		command_path = ft_strjoin(path, command);
 		free(path);
 		if (access(command_path, F_OK | X_OK) == 0)
-			return (0);
+			return (command_path);
 		free(command_path);
 		i++;
 	}
 	ft_free(paths);
 	return (NULL);
-}
-
-void	ft_open_files(t_pipex_data **pipex_data)
-{
-	if (access((*pipex_data)->infile, F_OK) == -1)
-		ft_error("Can't access entry file (ex. infile)", (*pipex_data));
-	(*pipex_data)->infd = open((*pipex_data)->infile, O_RDONLY, 0644);
-	if ((*pipex_data)->infd == -1)
-		ft_error("Opening infile file", (*pipex_data));
-	(*pipex_data)->outfd = open((*pipex_data)->outfile,
-			O_CREAT | O_RDWR | O_TRUNC, 0644);
 }
