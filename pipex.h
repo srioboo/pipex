@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/05/25 08:48:22 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 11:11:00 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ typedef struct s_pipex_data
 /* MEM                                                                        */
 /******************************************************************************/
 
+void	ft_perror(int error_code);
+
 void	ft_error(char *str, t_pipex_data *pipex_data);
+
+void	ft_error_exit(char *str, t_pipex_data *pipex_data, int error_code);
 
 void	ft_free(char **str_arr);
 
@@ -53,8 +57,6 @@ char	*ft_find_path(t_pipex_data *pipex_data,
 			const char *command, char **envp);
 
 void	ft_execute(t_pipex_data *pipex_data, char *command, char **envp);
-
-void	ft_open_files(t_pipex_data **pipex_data);
 
 /******************************************************************************/
 /* PROCESS                                                                    */
