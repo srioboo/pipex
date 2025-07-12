@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:54:19 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/07/12 11:11:00 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 11:30:30 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include "libft/src/libft.h"
 # include "libft/ft_printf/ft_printf.h"
 

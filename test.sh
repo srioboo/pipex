@@ -99,11 +99,11 @@ function test-error5()
 	printf "\n${BLUE}=== END TEST${NC}\n\n"
 }
 
-# test_base "0.1" infile "cat" "cat" outfile-cat "Copy infile content into outfile" 
-# test_base "0.2" infile "tr 'a' 'o'" "cat" outfile-to-upper "Convert all \"a\" letter into \"o\""
-# test_base "0.3" infile "tr 'a-z' 'A-Z'" "cat" outfile-to-upper "Convert to upper"
-# test_base "0.4" infile "cat" "wc -w" outfile-count-words "Count words" 
-# test_base "0.5" infile "sort" "cat" outfile-order-alphabetical "Order alphabetical the file content"
+test_base "0.1" infile "cat" "cat" outfile-cat "Copy infile content into outfile" 
+test_base "0.2" infile "tr 'a' 'o'" "cat" outfile-to-upper "Convert all \"a\" letter into \"o\""
+test_base "0.3" infile "tr 'a-z' 'A-Z'" "cat" outfile-to-upper "Convert to upper"
+test_base "0.4" infile "cat" "wc -w" outfile-count-words "Count words" 
+test_base "0.5" infile "sort" "cat" outfile-order-alphabetical "Order alphabetical the file content"
 
 # test-error1 outfile-error1
 # test-error2 outfile-error2
