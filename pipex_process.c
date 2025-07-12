@@ -6,7 +6,7 @@
 /*   By: srioboo- <srioboo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:11:28 by srioboo-          #+#    #+#             */
-/*   Updated: 2025/07/12 13:04:40 by srioboo-         ###   ########.fr       */
+/*   Updated: 2025/07/12 13:06:06 by srioboo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 	int		pipefd[2];
 	pid_t	pid1;
 	pid_t	pid2;
-	// int		status;
 
 	ft_open_files(&pipex_data);
 	if (pipe(pipefd) == -1)
@@ -54,15 +53,12 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 			waitpid(pid1, NULL, 0);
 	}
 	close(pipefd[1]);
-	// pipex_data->
 	pid2 = fork();
 	if (pid2 < 0)
 		ft_error("Creating second child proccess", pipex_data);
 	if (pid2 == 0)
 		second_process(pipex_data, envp, pipefd);
 	close(pipefd[0]);
-	// close(pipefd[1]);
-	// waitpid(pid1, &status, 0);
 	waitpid(pid2, NULL, 0);
 	return (0);
 }
