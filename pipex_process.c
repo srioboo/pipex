@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	first_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
+void	child_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 {
 	pipex_data->infd = open(pipex_data->infile, O_RDONLY, 0644);
 	if (pipex_data->infd == -1)
@@ -23,7 +23,7 @@ void	first_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 	ft_execute(pipex_data, pipex_data->program_a, envp);
 }
 
-void	second_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
+void	parent_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 {
 	pipex_data->outfd = open(pipex_data->outfile,
 			O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -38,26 +38,19 @@ void	second_process(t_pipex_data *pipex_data, char **envp, int *pipefd)
 int	pipex_process(t_pipex_data *pipex_data, char **envp)
 {
 	int		pipefd[2];
-	pid_t	pid1;
-	pid_t	pid2;
+	pid_t	pid;
+	int		status;
 
 	if (pipe(pipefd) == -1)
 		ft_error("An error creating pipe has happend", pipex_data);
-	pid1 = fork();
-	if (pid1 < 0)
+	pid = fork();
+	if (pid == -1)
 		ft_error("Creating child proccess", pipex_data);
-	if (pid1 == 0)
-	{
-	    first_process(pipex_data, envp, pipefd);
-	    waitpid(pid1, NULL, 0);
-	}
-	close(pipefd[1]);
-	pid2 = fork();
-	if (pid2 < 0)
-		ft_error("Creating second child proccess", pipex_data);
-	if (pid2 == 0)
-		second_process(pipex_data, envp, pipefd);
-	close(pipefd[0]);
-	waitpid(pid2, NULL, 0);
+	if (pid == 0)
+		child_process(pipex_data, envp, pipefd);
+	waitpid(pid, &status, 0);
+	parent_process(pipex_data, envp, pipefd);
+	if (WIFEXITED(status) && WEXITSTATUS(status))
+		exit(WEXITSTATUS(status));
 	return (0);
 }
