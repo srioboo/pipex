@@ -41,7 +41,6 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 	pid_t	pid1;
 	pid_t	pid2;
 
-	ft_open_files(&pipex_data);
 	if (pipe(pipefd) == -1)
 		ft_error("An error creating pipe has happend", pipex_data);
 	pid1 = fork();
@@ -49,8 +48,8 @@ int	pipex_process(t_pipex_data *pipex_data, char **envp)
 		ft_error("Creating child proccess", pipex_data);
 	if (pid1 == 0)
 	{
-			first_process(pipex_data, envp, pipefd);
-			waitpid(pid1, NULL, 0);
+	    first_process(pipex_data, envp, pipefd);
+	    waitpid(pid1, NULL, 0);
 	}
 	close(pipefd[1]);
 	pid2 = fork();
